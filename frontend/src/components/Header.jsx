@@ -50,7 +50,7 @@ export default function Header() {
                     <img
                         src="/Secure shield with glowing padlock.png"
                         alt="logo"
-                        className="w-10 h-10 object-contain drop-shadow-[0_0_6px_rgba(99,102,241,0.8)]"
+                        className="w-10 h-10 object-contain"
                     />
                     <span className="font-bold text-xl tracking-wide hidden sm:block">
                         Secure Vault
