@@ -10,7 +10,7 @@ export const setTokenHandler = (cb) => {
     setTokenCallback = cb;
 };
 
-const BASE_URL = "http://10.229.116.181:5000/api/v1";
+const BASE_URL = "/api/v1";
 
 export const apiRequest = async ({
     url,

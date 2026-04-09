@@ -1,6 +1,7 @@
 import express from 'express';
 import helmet from 'helmet';
-import cors from 'cors';
+import path from 'path';
+import { fileURLToPath } from 'url';
 import cookieParser from 'cookie-parser';
 import rateLimit from 'express-rate-limit';
 // import xss from 'xss-clean';
@@ -21,10 +22,7 @@ setInterval(() => {
 
 // 🔐 Security Middleware
 app.use(helmet());
-app.use(cors({
-    origin: `http://${process.env.PROJECT_IP}:5173`,
-    credentials: true
-}));
+
 app.use(express.json({ limit: '10mb' }));
 app.use(cookieParser());
 // app.use(xss());
@@ -51,5 +49,19 @@ app.get('/', (req, res) => {
 app.use('/api/v1/auth', authRoutes);
 app.use('/api/v1/vault', vaultRoutes);
 app.use('/api/v1/notes', noteRoutes);
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// 🔥 Serve Vite build (dist)
+app.use(express.static(path.join(__dirname, '../frontend/dist')));
+
+// fallback (React routing fix)
+app.use((req, res, next) => {
+    if (req.path.startsWith('/api')) {
+        return res.status(404).json({ message: "API route not found" });
+    }
+    res.sendFile(path.resolve(__dirname, '../frontend/dist/index.html'));
+});
 
 export default app;
