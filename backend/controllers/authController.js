@@ -321,9 +321,10 @@ export const loginStep2 = async (req, res) => {
 
         res.cookie('refreshToken', refreshToken, {
             httpOnly: true,
-            secure: process.env.NODE_ENV === 'production',
-            sameSite: 'lax',
-            path: '/api/v1/auth/refresh-token'
+            secure: true,
+            sameSite: 'strict',
+            path: '/api/v1/auth/refresh-token',
+            maxAge: 24 * 60 * 60 * 1000
         });
 
         await logActivity({
@@ -922,9 +923,10 @@ export const loginWithBackupCode = async (req, res) => {
 
         res.cookie('refreshToken', refreshToken, {
             httpOnly: true,
-            secure: process.env.NODE_ENV === 'production',
-            sameSite: 'lax',
-            path: '/api/v1/auth/refresh-token'
+            secure: true,
+            sameSite: 'strict',
+            path: '/api/v1/auth/refresh-token',
+            maxAge: 24 * 60 * 60 * 1000
         });
 
         await logActivity({
