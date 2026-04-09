@@ -41,11 +41,6 @@ const limiter = rateLimit({
 });
 app.use(limiter);
 
-// Routes placeholder
-app.get('/', (req, res) => {
-    res.send('Secure Vault API Running');
-});
-
 app.use('/api/v1/auth', authRoutes);
 app.use('/api/v1/vault', vaultRoutes);
 app.use('/api/v1/notes', noteRoutes);
