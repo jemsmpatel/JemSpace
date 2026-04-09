@@ -274,7 +274,7 @@ export const loginStep2 = async (req, res) => {
 
             user.devices.push(newDevice);
 
-            blockUrl = `http://${process.env.PROJECT_IP}:5000/api/v1/auth/block-device/${blockToken}`;
+            blockUrl = `${process.env.PROJECT_URL}/api/v1/auth/block-device/${blockToken}`;
         } else {
             existingDevice.lastUsed = new Date();
         }
@@ -598,7 +598,7 @@ export const forgotPassword = async (req, res) => {
         await user.save();
 
         // ✅ ONLY TOKEN in URL (no email)
-        const resetUrl = `http://${process.env.PROJECT_IP}:5173/reset-password/${resetToken}`;
+        const resetUrl = `${process.env.PROJECT_URL}/reset-password/${resetToken}`;
 
         await sendEmail(
             user.email,
