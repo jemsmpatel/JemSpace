@@ -167,6 +167,14 @@ export default function Login() {
                                     onChange={e => setForm({ ...form, secondaryPassword: e.target.value })}
                                 />
                             </div>
+                            <p className="text-right text-sm text-gray-400">
+                                <span
+                                    onClick={() => navigate('/forgot-password')}
+                                    className="text-blue-400 cursor-pointer hover:underline"
+                                >
+                                    Forgot Password?
+                                </span>
+                            </p>
 
                         </div>
 
